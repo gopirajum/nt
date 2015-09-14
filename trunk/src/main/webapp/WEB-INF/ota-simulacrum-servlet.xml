@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 		xmlns:p="http://www.springframework.org/schema/p" 
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:mvc="http://www.springframework.org/schema/mvc" 
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+							http://www.springframework.org/schema/context 
+							http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+							http://www.springframework.org/schema/mvc 
+							http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+							http://www.springframework.org/schema/util 
+							http://www.springframework.org/schema/util/spring-util-4.0.xsd" default-lazy-init="false">
+
+	<import resource="classpath:config/SpringBeans/common-framework-service.xml" /> 
+	<import resource="classpath:config/SpringBeans/ota-simulacra-agent.xml" /> 
+
+
+	<context:component-scan base-package="com.mhe.dpg.ota" />
+
+	<mvc:annotation-driven>
+		<!-- With Spring 4.x this is not required (deprecated and known to cause issues) 
+		<mvc:message-converters>
+        	<bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+		</mvc:message-converters>
+		-->
+
+		<!--
+			** a fix for spring default impl of trucating url @PathVariable suffix after a period 
+			** treating it as an an extensions (for e.g "/test.json" is truncated to "/test")
+			** this a fix for avoiding such default behavior.
+			**
+			** <mvc:path-matching
+			**	suffix-pattern="true"
+			**	trailing-slash="false"
+			**	registered-suffixes-only="true"
+			**	path-helper="pathHelper"
+			**	path-matcher="pathMatcher" />
+			**
+		-->
+		<mvc:path-matching suffix-pattern="false" registered-suffixes-only="true" />
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="jackson-object-mapper" />
+			</bean>
+		</mvc:message-converters>
+		
+		<!--
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.mhe.dpg.ota.sc.rest.utils.JacksonObjectMapper">
+						<property name="serializationInclusion" value="NON_NULL"/>
+					</bean>
+				</property>
+	            <property name="supportedMediaTypes">
+    	            <list>
+        	            <value>application/json</value>
+            	    </list>
+            	</property>
+			</bean> 
+		</mvc:message-converters>
+		-->
+	</mvc:annotation-driven>
+
+</beans>

@@ -1,0 +1,12 @@
+<table class="table table-striped" ng-controller="MainCtrl">
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>EMAIL</th>
+  </tr>
+  <tr ng-repeat="user in users.list.users">{{users}}
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+  </tr>
+</table>

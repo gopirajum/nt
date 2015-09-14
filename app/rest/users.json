@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@navaratan.com"
+    },
+    {
+      "id": 2,
+      "name": "Appleseed Froy",
+      "email": "appleseed@navaratan.com"
+    },
+    {
+      "id": 3,
+      "name": "David Litter",
+      "email": "david.litter@navaratan.com"
+    },
+    {
+      "id": 4,
+      "name": "Sam Wesley",
+      "email": "sam@navaratan.com"
+    },
+    {
+      "id": 5,
+      "name": "Christian Fold",
+      "email": "fold@navaratan.com"
+    }
+  ]
+}
